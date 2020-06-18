@@ -58,21 +58,21 @@ func add(mgr manager.Manager, r reconcile.Reconciler) error {
 
 // TODO(user): Modify this to be the types you create that are owned by the primary resource
 // Watch for changes to secondary resource Pods and requeue the owner Memcached
-err = c.Watch(&source.Kind{Type: &appsv1.Deployment{}}, &handler.EnqueueRequestForOwner{
-IsController: true,
-OwnerType: &swallowlabv1alpha1.FlaskEcho{},
-})
-if err != nil {
-return err
-}
+        err = c.Watch(&source.Kind{Type: &appsv1.Deployment{}}, &handler.EnqueueRequestForOwner{
+                IsController: true,
+                OwnerType: &swallowlabv1alpha1.FlaskEcho{},
+        })
+        if err != nil {
+                return err
+        }
 
-err = c.Watch(&source.Kind{Type: &corev1.Service{}}, &handler.EnqueueRequestForOwner{
-IsController: true,
-OwnerType: &swallowlabv1alpha1.FlaskEcho{},
-})
-if err != nil {
-return err
-}
+        err = c.Watch(&source.Kind{Type: &corev1.Service{}}, &handler.EnqueueRequestForOwner{
+                IsController: true,
+                OwnerType: &swallowlabv1alpha1.FlaskEcho{},
+        })
+        if err != nil {
+                return err
+        }
 
         return nil
 }
