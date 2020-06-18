@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tk-flask-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: tk-flask-operator
+  template:
+    metadata:
+      labels:
+        name: tk-flask-operator
+    spec:
+      serviceAccountName: tk-flask-operator
+      containers:
+        - name: tk-flask-operator
+          # Replace this with the built image name
+          image: takeyan/echo-flask-operator:v0.0.1
+          command:
+          - tk-flask-operator
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "tk-flask-operator"

@@ -1,0 +1,7 @@
+apiVersion: swallowlab.work/v1alpha1
+kind: FlaskEcho
+metadata:
+  name: example-flaskecho
+spec:
+  # Add fields here
+  size: 3
